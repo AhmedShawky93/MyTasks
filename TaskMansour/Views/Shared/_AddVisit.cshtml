@@ -1,0 +1,44 @@
+﻿@model TaskMansour.Models.Pos
+
+<hr />
+<div class="row">
+    <div class="col-12">
+       
+            <form asp-action="AddVisit" method="post">
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <select class="form-control" asp-for="SalesRepId" asp-items="@ViewBag.MyList">
+                    <option disabled selected>--Select--</option>
+                </select>
+
+
+                <div class="form-group">
+                    <label asp-for="PosName" class="control-label"></label>
+                    <input asp-for="PosName" class="form-control" />
+                    <span asp-validation-for="PosName" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="PosCode" class="control-label"></label>
+                    <input asp-for="PosCode" class="form-control" />
+                    <span asp-validation-for="PosCode" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VisitStart" class="control-label"></label>
+                    <input asp-for="VisitStart" class="form-control" />
+                    <span asp-validation-for="VisitStart" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label asp-for="VisitEnd" class="control-label"></label>
+                    <input asp-for="VisitEnd" class="form-control" />
+                    <span asp-validation-for="VisitEnd" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value=@(Model.PosID == null ? "Create" : "Update") class="btn btn-primary" />
+                </div>
+            </form>
+       
+    </div>
+</div>
+
+
+

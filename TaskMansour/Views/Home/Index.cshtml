@@ -1,0 +1,99 @@
+﻿@model IEnumerable<TaskMansour.Models.Pos>
+@{
+    ViewData["Title"] = "Home Page";
+}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary open mb-2" onclick="showPos()">
+    ADD NEW
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    Add SalesRep
+                </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="model">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th scope="col">SALESREP</th>
+            <th scope="col">POS-NAME</th>
+            <th scope="col">POS_CODE</th>
+            <th scope="col">VISIT_START</th>
+            <th scope="col">VISIT_END</th>
+            <th scope="col">EDIT</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+        <tr>
+            <td>@item.SalesRep.SalesRepName</td>
+            <td>@item.PosName</td>
+            <td>@item.PosCode</td>
+            <td>@item.VisitStart</td>
+            <td>@item.VisitEnd</td>
+            <td>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        EDIT
+                    </button>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <button class="dropdown-item text-success"  onclick="updatePos(@item.PosID)">Update</button>
+                        <a class="dropdown-item text-danger" asp-action="deleteVisit" asp-controller="Home" asp-route-id="@item.PosID" onclick="return confirm('are you sure?')">Delete</a>
+                    </div>
+                </div>
+            </td>
+
+        </tr>
+        }
+
+    </tbody>
+</table>
+
+@section Scripts{
+
+    <script>
+        function showPos() {
+            $.ajax({
+                url: "/Home/AddVisit/",
+                type: "Get",
+                data: {id : 0},
+                success: function (result) {
+                    $(".modal").modal('toggle')
+                    $('#model').html(result);
+                }
+            });
+        }
+        function updatePos(id) {
+            $.ajax({
+                url: "/Home/AddVisit/",
+                type: "Get",
+                data: {id : id },
+                success: function (result) {
+                    $(".modal").modal('toggle')
+                    $('#model').html(result);
+                }
+            });
+        }
+
+    </script>
+}
+
+
